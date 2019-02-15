@@ -16,7 +16,8 @@ public class AvalaraEngine {
     public static void main(String[] args) {
 
         String sysdir = System.getProperty("user.dir").replace("\\","/");
-        String path = sysdir.concat("/src/main/resources/Seller-Json.json");
+        String FILENAME = "Seller-Json.json";
+        String path = sysdir.concat("/src/main/resources/").concat(FILENAME);
         System.out.println(path);
         FileHandlingUtility fileHandlingUtility = new FileHandlingUtility();
         AvalaraJsonParser avalaraJsonParser = fileHandlingUtility.getAvalaraJson(path);
@@ -51,6 +52,7 @@ public class AvalaraEngine {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            System.out.println("Amazon Seller Key: " + avalaraJsonParser.getAmazonSellerKey());
         }
 
         JurisdictionISOCode jurisdictionISOCode = avalaraJsonParser.getRegistrations().getJurisdictionISOCode();
@@ -60,9 +62,6 @@ public class AvalaraEngine {
         avalaraJsonParser.setRegistrations(registrations);
         // Save tp File
         fileHandlingUtility.saveAvalaraJson(avalaraJsonParser, path);
+        System.out.println(fileHandlingUtility.isFileNameHybrid(FILENAME));
     }
-
-    public void ReadindJsonWithRestAssured(){
-
-        }
 }
